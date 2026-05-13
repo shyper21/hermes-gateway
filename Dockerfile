@@ -1,3 +1,3 @@
 FROM nousresearch/hermes-agent:latest
-RUN pip install python-telegram-bot
+RUN uv pip install python-telegram-bot --system
 CMD ["gateway", "run"]
