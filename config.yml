@@ -1,0 +1,44 @@
+# Hermes Agent Config
+# Memory: SQLite via Railway Volume (/data)
+# Web Search: DuckDuckGo (gratis, no API key)
+
+llm:
+  default_provider: openrouter
+  default_model: deepseek/deepseek-chat
+
+  providers:
+    openrouter:
+      api_key: ${OPENROUTER_API_KEY}
+      base_url: https://openrouter.ai/api/v1
+
+memory:
+  enabled: true
+  backend: sqlite
+  path: /data/hermes_memory.db
+  max_history: 50
+  summarize_after: 40
+
+tools:
+  web_search:
+    enabled: true
+    provider: duckduckgo
+    max_results: 5
+
+  browser:
+    enabled: false
+
+channels:
+  telegram:
+    enabled: true
+    token: ${TELEGRAM_BOT_TOKEN}
+    allowed_users:
+      - ${TELEGRAM_ALLOWED_USERS}
+
+gateway:
+  host: 0.0.0.0
+  port: ${PORT}
+  api_key: ${API_SERVER_KEY}
+
+logging:
+  level: INFO
+  path: /data/logs
